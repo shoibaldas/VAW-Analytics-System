@@ -144,7 +144,7 @@ Dhaka · Chittagong · Rajshahi · Khulna · Barisal · Sylhet · Rangpur · Mym
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/vaw-analytics-bangladesh.git
+git clone https://github.com/shoibaldas/VAW-Analytics-System.git
 cd vaw-analytics-bangladesh
 
 # Create virtual environment
