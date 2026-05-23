@@ -180,20 +180,6 @@ jupyter>=1.0.0
 
 ---
 
-## 📌 Project Status
-
-| Phase | Status |
-|-------|--------|
-| Dataset access (DHS 2022) | ✅ Requested |
-| Data exploration & EDA | ⏳ In Progress |
-| Preprocessing pipeline | ⏳ Pending |
-| Model training | ⏳ Pending |
-| SHAP analysis | ⏳ Pending |
-| Risk map visualization | ⏳ Pending |
-| 2024 validation layer | ⏳ Pending |
-
----
-
 ## 📜 Data Usage & Ethics
 
 - DHS 2022 data is used strictly for academic and research purposes in accordance with the [DHS Program Data Use Agreement](https://dhsprogram.com/data/terms-of-use.cfm)
@@ -211,7 +197,3 @@ jupyter>=1.0.0
 - Lundberg, S. & Lee, S.I. *A Unified Approach to Interpreting Model Predictions (SHAP)*. NeurIPS 2017.
 
 ---
-
----
-
-> *This project is part of a personal research portfolio developed for MSc program applications in Artificial Intelligence and Data Science.*
