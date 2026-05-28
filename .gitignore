@@ -1,0 +1,15 @@
+# DHS Raw Data — not shared due to DHS data use agreement
+data/raw/
+
+# Data file formats
+*.DTA
+*.dta
+*.dbf
+*.shx
+*.prj
+
+# Python
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

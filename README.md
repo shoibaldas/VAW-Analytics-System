@@ -1,29 +1,75 @@
 # 📊 Violence Against Women (VAW) Analytics System — Bangladesh
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat-square&logo=python)
+![Python](https://img.shields.io/badge/Python-3.14-blue?style=flat-square&logo=python)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?style=flat-square&logo=jupyter)
-![Status](https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 ![Data](https://img.shields.io/badge/Data-DHS%202022-blueviolet?style=flat-square)
 
-An end-to-end machine learning and data analytics project predicting **intimate partner violence (IPV) risk factors** among women in Bangladesh, using the **Bangladesh Demographic and Health Survey (DHS) 2022** microdata. Model predictions are cross-validated against **BBS/UNFPA Violence Against Women Survey 2024** national findings — the largest VAW study ever conducted in Bangladesh (27,476 respondents).
+An end-to-end machine learning and data analytics project analyzing **intimate partner violence (IPV) tolerance** among women in Bangladesh, using the **Bangladesh Demographic and Health Survey (DHS) 2022** microdata (19,606 respondents). The project applies classification models, SHAP explainability, and geospatial visualization to uncover which socioeconomic factors drive IPV acceptance across Bangladesh's 8 administrative divisions.
+
+---
+
+## 🔑 Key Findings at a Glance
+
+| Insight | Finding |
+|--------|---------|
+| Overall IPV tolerance rate | **13.1%** of women accept wife beating |
+| Highest risk division | **Khulna — 16.3%** |
+| Lowest risk division | **Mymensingh — 9.6%** |
+| Education impact | No education **(17%)** vs Higher education **(7%)** — 59% reduction |
+| Wealth impact | Poorest **(15.9%)** vs Richest **(9.3%)** — 41% reduction |
+| Residence gap | Rural **(14.1%)** vs Urban **(10.9%)** |
+| Strongest predictor | **Age** (confirmed by SHAP analysis) |
+| Best model AUC | **Logistic Regression — 0.5677** |
+
+---
+
+## 🗺️ Division-wise IPV Risk Map
+
+![Bangladesh IPV Risk Map](reports/figures/bangladesh_ipv_risk_map.png)
+
+> Choropleth map showing IPV tolerance rates across all 8 divisions of Bangladesh. Khulna and Rangpur emerge as highest-risk regions, while Mymensingh shows the lowest tolerance rate.
+
+---
+
+## 📊 EDA — IPV Tolerance by Socioeconomic Factors
+
+![IPV Tolerance Analysis](reports/figures/ipv_tolerance_analysis.png)
+
+> Six-panel chart showing IPV tolerance breakdown by division, education level, wealth index, residence type, age group, and employment status.
+
+---
+
+## 🤖 ML Model Performance
+
+![Model Comparison](reports/figures/model_comparison.png)
+
+> All three models outperform the random baseline (AUC = 0.50). The modest AUC scores are themselves a finding — socioeconomic factors alone have limited predictive power, suggesting cultural and social norms play a significant role in IPV tolerance.
+
+---
+
+## 🔍 SHAP Feature Importance
+
+![SHAP Importance](reports/figures/shap_importance.png)
+
+> SHAP analysis reveals **Age** as the strongest predictor, followed by **Division** (regional culture) and **Education Level**. Marital status has the least impact.
 
 ---
 
 ## 🎯 Project Objectives
 
-- Predict IPV vulnerability across demographic and geographic segments in Bangladesh
-- Identify the strongest socioeconomic risk factors (age, education, division, wealth index, employment)
-- Perform decade-long trend analysis by comparing DHS 2022 findings against BBS/UNFPA 2024 published results
+- Predict IPV tolerance across demographic and geographic segments in Bangladesh
+- Identify the strongest socioeconomic risk factors using SHAP explainability
 - Visualize division-wise risk distribution across Bangladesh's 8 administrative divisions
-- Provide interpretable, policy-relevant insights using SHAP explainability
+- Provide interpretable, policy-relevant insights for researchers and NGOs
 
 ---
 
 ## 📁 Project Structure
 
 ```
-vaw-analytics-bangladesh/
+VAW-Analytics-System/
 │
 ├── data/
 │   ├── raw/                  # DHS 2022 raw dataset (not included — see Data Access)
@@ -31,97 +77,55 @@ vaw-analytics-bangladesh/
 │   └── external/             # BBS/UNFPA 2024 aggregated statistics
 │
 ├── notebooks/
-│   ├── 01_data_exploration.ipynb       # EDA and data understanding
-│   ├── 02_preprocessing.ipynb          # Cleaning, encoding, SMOTE
-│   ├── 03_model_training.ipynb         # ML model training and evaluation
-│   ├── 04_shap_explainability.ipynb    # SHAP analysis and feature importance
-│   ├── 05_visualization.ipynb          # Risk maps and trend charts
-│   └── 06_validation_2024.ipynb        # Cross-validation with BBS/UNFPA 2024
-│
-├── src/
-│   ├── preprocessing.py      # Data cleaning utilities
-│   ├── features.py           # Feature engineering
-│   ├── models.py             # Model training pipeline
-│   └── visualization.py      # Plotting and mapping utilities
+│   └── VAW_Analytics_Bangladesh_DHS2022.ipynb  # Main analysis notebook
 │
 ├── reports/
-│   └── figures/              # Exported charts and maps
+│   └── figures/
+│       ├── bangladesh_ipv_risk_map.png      # Division choropleth map
+│       ├── ipv_tolerance_analysis.png       # EDA charts
+│       ├── model_comparison.png             # Model AUC comparison
+│       └── shap_importance.png              # SHAP feature importance
 │
+├── DATA_ACCESS.md            # How to access the DHS dataset
+├── .gitignore                # Excludes raw data per DHS policy
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## 🗂️ Data Sources
-
-### Primary Dataset
-- **Bangladesh Demographic and Health Survey (DHS) 2022**
-  - Source: [DHS Program](https://dhsprogram.com)
-  - ~20,000+ individual-level respondents
-  - Includes domestic violence module, socioeconomic indicators, geographic data
-  - ⚠️ Raw data not included in this repository. Access requires free registration at [dhsprogram.com](https://dhsprogram.com/data/new-user-registration.cfm)
-
-### Validation Reference
-- **BBS/UNFPA Violence Against Women Survey 2024**
-  - Source: [UNFPA Bangladesh](https://bangladesh.unfpa.org/en/2024-violence-against-women-survey)
-  - 27,476 respondents across all 8 divisions
-  - Used for trend validation and cross-referencing model outputs
-  - Aggregated statistics extracted from the published highlights report
-
----
-
 ## 🧠 Methodology
 
-### 1. Exploratory Data Analysis (EDA)
-- Distribution of IPV types (physical, sexual, emotional, economic) by age group, division, education
-- Urban vs. rural comparison
-- Wealth index vs. violence prevalence correlation
+### 1. Data & Target Variable
+- **Source:** Bangladesh DHS 2022 — 19,606 women aged 15–49
+- **Target:** Binary IPV tolerance score derived from v744a–v744e (wife beating attitude variables)
+- **Definition:** 1 = accepts wife beating for at least one reason, 0 = never accepts
 
-### 2. Data Preprocessing
-- Handling missing values and encoding categorical variables
-- Feature selection based on domain knowledge and correlation analysis
-- SMOTE (Synthetic Minority Oversampling Technique) for class imbalance
+### 2. Exploratory Data Analysis
+- IPV tolerance breakdown by division, education, wealth, age group, residence, employment
+- Clear negative correlation between education/wealth and IPV tolerance
 
-### 3. Machine Learning Models
-| Model | Purpose |
-|-------|---------|
-| Logistic Regression | Baseline classifier |
-| Random Forest | Ensemble model, feature importance |
-| XGBoost | Gradient boosting, high performance |
-| CatBoost | Handles categorical features natively |
+### 3. Data Preprocessing
+- SMOTE applied to handle 6.7:1 class imbalance
+- Missing husband-related features filled with median
+- 80/20 train-test split with stratification
 
-### 4. Model Interpretability
-- **SHAP values** to identify top contributing risk factors per prediction
-- Feature importance ranking across models
-- Division-level risk scoring
+### 4. Machine Learning Models
 
-### 5. Validation Against 2024 Data
-- Compare model-predicted high-risk segments with BBS/UNFPA 2024 findings
-- Decade trend analysis: 2011 → 2015 → 2022 → 2024
-- Division-wise agreement rate between predictions and national report
+| Model | AUC Score |
+|-------|-----------|
+| Logistic Regression | **0.5677** ← Best |
+| XGBoost | 0.5550 |
+| Random Forest | 0.5358 |
 
----
+### 5. SHAP Explainability
+- TreeExplainer applied to XGBoost model
+- Top features: Age → Division → Education → Wealth Index → Employment
 
-## 📊 Key Findings
-
-> ⏳ Full results will be updated upon project completion.
-
-Preliminary insights based on BBS/UNFPA 2024 published statistics:
-- **76%** of Bangladeshi women have experienced some form of IPV in their lifetime
-- Women aged **15–19** face the highest IPV rates (62%+ in the past 12 months)
-- **Rural areas** consistently show higher vulnerability than urban zones
-- **Education level** is one of the strongest protective factors against IPV
-- **Climate-vulnerable and slum areas** show disproportionately higher risk
-
----
-
-## 🗺️ Division-wise Risk Map
-
-> ⏳ Map visualization will be added upon completion of notebook 05.
-
-The risk map will visualize predicted IPV vulnerability scores across Bangladesh's 8 administrative divisions:
-Dhaka · Chittagong · Rajshahi · Khulna · Barisal · Sylhet · Rangpur · Mymensingh
+### 6. Geospatial Risk Mapping
+- Division-level IPV tolerance rates calculated from survey data
+- Bangladesh administrative boundaries sourced from GADM
+- Choropleth map visualizing regional risk distribution
 
 ---
 
@@ -129,12 +133,13 @@ Dhaka · Chittagong · Rajshahi · Khulna · Barisal · Sylhet · Rangpur · Mym
 
 | Category | Tools |
 |----------|-------|
-| Language | Python 3.11 |
+| Language | Python 3.14 |
 | Data Processing | Pandas, NumPy |
-| Machine Learning | Scikit-learn, XGBoost, CatBoost |
+| Machine Learning | Scikit-learn, XGBoost |
+| Class Balancing | imbalanced-learn (SMOTE) |
 | Explainability | SHAP |
-| Visualization | Matplotlib, Seaborn, Plotly |
-| Geospatial | GeoPandas, Folium |
+| Visualization | Matplotlib, Seaborn |
+| Geospatial | GeoPandas |
 | Environment | Jupyter Notebook |
 | Version Control | Git, GitHub |
 
@@ -145,14 +150,18 @@ Dhaka · Chittagong · Rajshahi · Khulna · Barisal · Sylhet · Rangpur · Mym
 ```bash
 # Clone the repository
 git clone https://github.com/shoibaldas/VAW-Analytics-System.git
-cd vaw-analytics-bangladesh
+cd VAW-Analytics-System
 
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+venv\Scripts\activate      # Windows
+# source venv/bin/activate  # Mac/Linux
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Get the dataset (see DATA_ACCESS.md)
+# Place DTA file in data/raw/BDIR81DT/
 
 # Launch Jupyter Notebook
 jupyter notebook
@@ -160,40 +169,33 @@ jupyter notebook
 
 ---
 
-## 📦 Requirements
+## 🗂️ Data Access
 
-```
-pandas>=2.0.0
-numpy>=1.24.0
-scikit-learn>=1.3.0
-xgboost>=2.0.0
-catboost>=1.2.0
-shap>=0.44.0
-matplotlib>=3.7.0
-seaborn>=0.12.0
-plotly>=5.15.0
-geopandas>=0.14.0
-folium>=0.14.0
-imbalanced-learn>=0.11.0
-jupyter>=1.0.0
-```
+The raw DHS 2022 dataset is **not included** in this repository due to the DHS Program Data Use Agreement. See [DATA_ACCESS.md](DATA_ACCESS.md) for instructions on how to obtain the dataset for free.
 
 ---
 
-## 📜 Data Usage & Ethics
+## 📜 Ethics & Data Usage
 
-- DHS 2022 data is used strictly for academic and research purposes in accordance with the [DHS Program Data Use Agreement](https://dhsprogram.com/data/terms-of-use.cfm)
-- No individual-level raw data is shared or included in this repository
-- This project does not attempt to identify or profile individual respondents
-- Findings are intended to support evidence-based policy and research — not for commercial use
+- DHS 2022 data used strictly for academic research per the [DHS Data Use Agreement](https://dhsprogram.com/data/terms-of-use.cfm)
+- No individual-level raw data is shared in this repository
+- No attempt to identify or profile individual respondents
+- Findings intended for evidence-based policy and research only
 
 ---
 
 ## 🔗 References
 
-- Bangladesh Bureau of Statistics (BBS) & UNFPA. *Violence Against Women Survey 2024*. [Link](https://bangladesh.unfpa.org/en/2024-violence-against-women-survey)
 - ICF. *Bangladesh Demographic and Health Survey 2022*. DHS Program. [Link](https://dhsprogram.com)
+- BBS & UNFPA. *Violence Against Women Survey 2024*. [Link](https://bangladesh.unfpa.org/en/2024-violence-against-women-survey)
 - WHO. *Violence against women prevalence estimates, 2018*. [Link](https://www.who.int/publications/i/item/9789240022256)
-- Lundberg, S. & Lee, S.I. *A Unified Approach to Interpreting Model Predictions (SHAP)*. NeurIPS 2017.
+- Lundberg & Lee. *A Unified Approach to Interpreting Model Predictions (SHAP)*. NeurIPS 2017.
 
 ---
+
+## 👤 Author
+
+**Shoibal Das** — Backend Developer & Researcher
+📧 shoibal.das010@gmail.com
+
+> *This project is part of a personal research portfolio developed for MSc program applications in Artificial Intelligence and Data Science.*
