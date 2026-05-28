@@ -70,24 +70,14 @@ An end-to-end machine learning and data analytics project analyzing **intimate p
 
 ```
 VAW-Analytics-System/
-│
 ├── data/
-│   ├── raw/                  # DHS 2022 raw dataset (not included — see Data Access)
-│   ├── processed/            # Cleaned and feature-engineered dataset
-│   └── external/             # BBS/UNFPA 2024 aggregated statistics
-│
+│   └── raw/               # DHS 2022 dataset (not included — see DATA_ACCESS.md)
 ├── notebooks/
-│   └── VAW_Analytics_Bangladesh_DHS2022.ipynb  # Main analysis notebook
-│
+│   └── VAW_Analytics_Bangladesh_DHS2022.ipynb
 ├── reports/
-│   └── figures/
-│       ├── bangladesh_ipv_risk_map.png      # Division choropleth map
-│       ├── ipv_tolerance_analysis.png       # EDA charts
-│       ├── model_comparison.png             # Model AUC comparison
-│       └── shap_importance.png              # SHAP feature importance
-│
-├── DATA_ACCESS.md            # How to access the DHS dataset
-├── .gitignore                # Excludes raw data per DHS policy
+│   └── figures/           # All generated charts and maps
+├── DATA_ACCESS.md
+├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
@@ -114,9 +104,13 @@ VAW-Analytics-System/
 
 | Model | AUC Score |
 |-------|-----------|
-| Logistic Regression | **0.5677** ← Best |
+| Logistic Regression | 0.5677 |
 | XGBoost | 0.5550 |
 | Random Forest | 0.5358 |
+| Random Baseline | 0.5000 |
+
+> Models outperform the random baseline. Low AUC reflects the known
+> complexity of predicting IPV tolerance from demographic variables alone.
 
 ### 5. SHAP Explainability
 - TreeExplainer applied to XGBoost model
@@ -141,7 +135,6 @@ VAW-Analytics-System/
 | Visualization | Matplotlib, Seaborn |
 | Geospatial | GeoPandas |
 | Environment | Jupyter Notebook |
-| Version Control | Git, GitHub |
 
 ---
 
